@@ -12,7 +12,6 @@ export class DataService {
   }
 
   async create(dto: CteateClientDto) {
-    console.log(dto);
     return this.clientsRepo.create(dto);
   }
 }
