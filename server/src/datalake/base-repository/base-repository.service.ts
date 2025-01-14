@@ -9,7 +9,7 @@ import {
 export abstract class BaseRepositoryService<T extends Document> {
   protected constructor(protected readonly entityModel: Model<T, {}>) {}
 
-  async create(createEntityDto: T): Promise<T> {
+  async create(createEntityDto: Record<string, any>): Promise<any> {
     const entity = await this.entityModel.create(createEntityDto as T);
     return (await entity.save()).toObject();
   }

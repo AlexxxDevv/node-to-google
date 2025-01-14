@@ -8,6 +8,9 @@ import { MongooseConfigService } from './config/database-config.service';
 import configuration from './config/configuration';
 import { ClientsRepositoryModule } from './datalake/clients/clients.module';
 import { ClientsStatusRepositoryModule } from './datalake/clients-status/clients-status.module';
+import { UsersRepositoryModule } from './datalake/users/users.module';
+import { UsersModule } from './core/users/users.module';
+import { AuthApiModule } from './api/auth-api/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +23,9 @@ import { ClientsStatusRepositoryModule } from './datalake/clients-status/clients
     DataModule,
     ClientsRepositoryModule,
     ClientsStatusRepositoryModule,
+    UsersRepositoryModule,
+    UsersModule,
+    AuthApiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
