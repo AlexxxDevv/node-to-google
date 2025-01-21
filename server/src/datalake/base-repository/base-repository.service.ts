@@ -6,8 +6,12 @@ import {
   MongooseBulkSaveOptions,
 } from 'mongoose';
 
-export abstract class BaseRepositoryService<T extends Document> {
-  protected constructor(protected readonly entityModel: Model<T, {}>) {}
+export abstract class BaseRepositoryService<
+  T extends Document,
+  V = {},
+  M = {},
+> {
+  protected constructor(protected readonly entityModel: Model<T, {}, M, V>) {}
 
   async create(createEntityDto: Record<string, any>): Promise<any> {
     const entity = await this.entityModel.create(createEntityDto as T);
@@ -20,6 +24,11 @@ export abstract class BaseRepositoryService<T extends Document> {
 
   async find(query: RootFilterQuery<T>): Promise<Array<T>> {
     return this.entityModel.find(query);
+  }
+
+  async findOne(query: {}): Promise<any> {
+    const doc = await this.entityModel.findOne(query).exec();
+    return doc.toObject();
   }
 
   async bulkSave(docs: any, options: MongooseBulkSaveOptions): Promise<any> {

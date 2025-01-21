@@ -10,7 +10,8 @@ import { ClientsRepositoryModule } from './datalake/clients/clients.module';
 import { ClientsStatusRepositoryModule } from './datalake/clients-status/clients-status.module';
 import { UsersRepositoryModule } from './datalake/users/users.module';
 import { UsersModule } from './core/users/users.module';
-import { AuthApiModule } from './api/auth-api/auth.module';
+import { AuthApiModule } from './api/auth-api/auth-api.module';
+import { AuthModule } from './core/aut/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AuthApiModule } from './api/auth-api/auth.module';
     UsersRepositoryModule,
     UsersModule,
     AuthApiModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

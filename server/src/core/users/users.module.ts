@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-
 import { UsersRepositoryModule } from '../../datalake/users/users.module';
 import { UsersService } from './users.service';
 
