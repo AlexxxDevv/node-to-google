@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from 'src/api/auth-api/dto/create-user.dto';
 import { UsersRepository } from 'src/datalake/users/users.repository';
@@ -10,6 +11,11 @@ export class UsersService {
     return this.usersRepo.create(dto);
   }
 
+  async find(query: {}) {
+    const user = await this.usersRepo.find(query);
+    return user;
+  }
+
   async findOne(id: number) {
     const query = { _id: id };
     const user = await this.usersRepo.findOne(query);
@@ -17,7 +23,7 @@ export class UsersService {
   }
 
   async findByUsername(username: string) {
-    const query = { login: username };
+    const query = { username: username };
     const user = await this.usersRepo.findOne(query);
     return user;
   }

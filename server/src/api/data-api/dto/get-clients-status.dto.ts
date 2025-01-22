@@ -4,5 +4,5 @@ import { IsNumber } from 'class-validator';
 export class GetClientsStatusDto {
   @ApiProperty()
   @IsNumber()
-  id: number;
+  ids: number[];
 }

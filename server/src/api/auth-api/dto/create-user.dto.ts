@@ -1,4 +1,4 @@
 export type CreateUserDto = {
-  login: string;
+  username: string;
   password: string;
 };

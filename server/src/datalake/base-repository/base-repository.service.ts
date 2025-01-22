@@ -22,8 +22,18 @@ export abstract class BaseRepositoryService<
     return await this.entityModel.collection.insertMany(createEntityDto);
   }
 
-  async find(query: RootFilterQuery<T>): Promise<Array<T>> {
-    return this.entityModel.find(query);
+  async find(
+    query?: RootFilterQuery<T>,
+    projection?: Record<string, unknown>,
+    options?: Record<string, unknown>,
+  ): Promise<Array<T>> {
+    return this.entityModel.find(
+      query,
+      {
+        ...projection,
+      },
+      options,
+    );
   }
 
   async findOne(query: {}): Promise<any> {
