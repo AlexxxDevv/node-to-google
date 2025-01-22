@@ -44,12 +44,15 @@ export class ClientsService implements OnModuleInit {
       });
     }
     try {
+      await this.clientsRepo.deleteMany();
       await this.clientsRepo.createMany(userData);
       const users = await this.clientsRepo.find({});
       const usersStatus: any = users.map((user) => {
+        const index = Math.floor(Math.random() * 3);
+        const statusname = ['busy', 'online', 'offline', 'ready'];
         const userS = {
           _id: user._id,
-          status: 'online',
+          status: statusname[index],
         };
         return userS;
       });
