@@ -16,27 +16,27 @@ export default async function getData(token: string, listIds: string[], listName
       const offset = i * 1000;
       // eslint-disable-next-line no-await-in-loop
       response = await axios.get(
-        `http://94.103.91.4:5000/clients?offset=${offset}&limit=1000`,
-        { headers: { Authorization: token } },
+        `http://localhost:3000/clients?offset=${offset}&limit=1000`,
+        { headers: { Authorization: `Bearer ${token}` } },
       );
       response.data.forEach((item: any) => {
-        arr.set(item.id, item);
+        arr.set(item._id, item);
       });
-      const usId = response.data.map((item: { id: any; }) => item.id);
+      const usId = response.data.map((item: { _id: any; }) => item._id);
       // eslint-disable-next-line no-await-in-loop
-      statusRes = await axios('http://94.103.91.4:5000/clients', {
-        method: 'post',
+      statusRes = await axios('http://localhost:3000/clients/status', {
+        method: 'get',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
         data: JSON.stringify({
-          userIds: usId,
+          ids: usId,
         }),
       });
       statusRes.data.forEach((item: any) => {
-        status.set(item.id, item);
+        status.set(item._id, item);
       });
       // eslint-disable-next-line no-plusplus
       i++;

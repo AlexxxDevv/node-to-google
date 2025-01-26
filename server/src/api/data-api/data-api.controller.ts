@@ -85,7 +85,7 @@ export class DataController {
 
   @UseGuards(JwtAuthGuard)
   @Get('status')
-  @ApiBody({ type: CteateClientDto })
+  @ApiBody({ type: GetClientsStatusDto })
   @ApiOperation({ summary: 'Статус клиента' })
   @ApiCreatedResponse({
     description: 'список айди клиентов и статусов',
