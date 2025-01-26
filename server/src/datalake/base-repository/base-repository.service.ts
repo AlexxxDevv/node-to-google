@@ -38,7 +38,9 @@ export abstract class BaseRepositoryService<
 
   async findOne(query: {}): Promise<any> {
     const doc = await this.entityModel.findOne(query).exec();
-    return doc.toObject();
+    if (doc) {
+      return doc.toObject();
+    }
   }
 
   async bulkSave(docs: any, options: MongooseBulkSaveOptions): Promise<any> {

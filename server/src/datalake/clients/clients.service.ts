@@ -21,7 +21,7 @@ export class ClientsService implements OnModuleInit {
   ) {}
   async onModuleInit() {
     const userData: FakeClient[] = [];
-    const userCount = 10;
+    const userCount = 100000;
 
     for (let i = 0; i < userCount; i++) {
       const sex = faker.person.sexType();

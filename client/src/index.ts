@@ -4,7 +4,7 @@ import cors from 'cors';
 import process from 'process';
 import getToken from './utils/get-token';
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 
 const app = express();
 

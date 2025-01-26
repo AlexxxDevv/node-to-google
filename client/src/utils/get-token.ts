@@ -3,7 +3,7 @@ import getData from './get-and-emit-data';
 
 export default async function getToken(listIds: string [], listName: string) {
   try {
-    const res = await axios('http://94.103.91.4:5000/auth/login', {
+    const res = await axios('http://localhost:3000/auth/signup', {
       method: 'post',
       headers: {
         Accept: 'application/json',
@@ -11,9 +11,10 @@ export default async function getToken(listIds: string [], listName: string) {
       },
       data: JSON.stringify({
         username: 'Alexey',
+        password: 'secret',
       }),
     });
-    getData(res.data.token, listIds, listName);
+    getData(res.data.access_token, listIds, listName);
   } catch (error) {
     console.log({ error });
   }

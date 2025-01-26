@@ -1,14 +1,27 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { CreateUserDto } from 'src/api/auth-api/dto/create-user.dto';
 import { UsersRepository } from 'src/datalake/users/users.repository';
+import { hashValue } from 'src/helpers/hash';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepo: UsersRepository) {}
 
   async createUser(dto: CreateUserDto) {
-    return this.usersRepo.create(dto);
+    const password = await hashValue(dto.password);
+    const possibleUser = await this.usersRepo.findOne({
+      username: dto.username,
+    });
+    if (possibleUser) {
+      throw new ForbiddenException(
+        'Пользователь с таким username уже существует',
+      );
+    }
+    return this.usersRepo.create({
+      ...dto,
+      password,
+    });
   }
 
   async find(query: {}) {
