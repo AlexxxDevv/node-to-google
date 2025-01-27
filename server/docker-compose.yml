@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  backend: 
+    container_name: api-services
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - DATABASE_URL=mongodb://mongodb:27017/node-to-google
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+  mongodb: 
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - backend
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - backend
+networks:
+  backend:  
